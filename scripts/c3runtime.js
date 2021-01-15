@@ -2822,6 +2822,25 @@ inst.GetBehaviorInstanceFromCtor(C3.Behaviors.scrollto);if(!behInst||!behInst.Ge
 'use strict';{const C3=self.C3;C3.Behaviors.scrollto.Exps={}};
 
 
+'use strict';{const C3=self.C3;C3.Behaviors.jumpthru=class JumpthruBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.jumpthru.Type=class JumpthruType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}};
+
+
+'use strict';{const C3=self.C3;const ENABLE=0;C3.Behaviors.jumpthru.Instance=class JumpthruInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this.SetEnabled(true);if(properties)this.SetEnabled(properties[ENABLE])}Release(){super.Release()}SetEnabled(e){this._inst._SetJumpthruEnabled(!!e)}IsEnabled(){return this._inst._IsJumpthruEnabled()}SaveToJson(){return{"e":this.IsEnabled()}}LoadFromJson(o){this.SetEnabled(o["e"])}GetPropertyValueByIndex(index){switch(index){case ENABLE:return this.IsEnabled()}}SetPropertyValueByIndex(index,
+value){switch(index){case ENABLE:this.SetEnabled(value);break}}GetDebuggerProperties(){return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:"behaviors.jumpthru.properties.enabled.name",value:this.IsEnabled(),onedit:v=>this.SetEnabled(v)}]}]}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.jumpthru.Cnds={IsEnabled(){return this.IsEnabled()}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.jumpthru.Acts={SetEnabled(e){this.SetEnabled(e)}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.jumpthru.Exps={}};
+
+
 "use strict"
 {
 	const C3 = self.C3;
@@ -2834,6 +2853,7 @@ inst.GetBehaviorInstanceFromCtor(C3.Behaviors.scrollto);if(!behInst||!behInst.Ge
 		C3.Behaviors.scrollto,
 		C3.Plugins.Touch,
 		C3.Plugins.Text,
+		C3.Behaviors.jumpthru,
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Sprite.Acts.SetMirrored,
 		C3.Behaviors.Platform.Acts.SimulateControl,
@@ -2841,8 +2861,22 @@ inst.GetBehaviorInstanceFromCtor(C3.Behaviors.scrollto);if(!behInst||!behInst.Ge
 		C3.Plugins.Sprite.Cnds.IsOutsideLayout,
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Plugins.Sprite.Acts.SetY,
+		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.Sprite.Cnds.OnCollision,
-		C3.Plugins.Sprite.Acts.Destroy
+		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Text.Acts.SetText,
+		C3.Plugins.System.Cnds.Every,
+		C3.Plugins.Sprite.Cnds.IsOverlapping,
+		C3.Behaviors.Platform.Acts.SetEnabled,
+		C3.Plugins.Text.Acts.SetVisible,
+		C3.Plugins.System.Acts.Wait,
+		C3.Plugins.System.Acts.WaitForPreviousActions,
+		C3.Plugins.System.Cnds.CompareBoolVar,
+		C3.Plugins.Sprite.Acts.SetVisible,
+		C3.Plugins.Sprite.Exps.Y,
+		C3.Plugins.System.Acts.ToggleBoolVar,
+		C3.Plugins.System.Cnds.CompareVar,
+		C3.Plugins.Sprite.Acts.MoveForward
 		];
 	};
 	self.C3_JsPropNameTable = [
@@ -2864,7 +2898,30 @@ inst.GetBehaviorInstanceFromCtor(C3.Behaviors.scrollto);if(!behInst||!behInst.Ge
 		{ТайловыйФон7: 0},
 		{ТайловыйФон8: 0},
 		{Текст: 0},
-		{Спрайт6: 0}
+		{Спрайт6: 0},
+		{TimeTxt: 0},
+		{Текст3: 0},
+		{Текст4: 0},
+		{ScoreTxt: 0},
+		{Спрайт7: 0},
+		{Спрайт8: 0},
+		{Спрайт9: 0},
+		{hello: 0},
+		{СквознаяПлатформа: 0},
+		{Спрайт10: 0},
+		{Текст2: 0},
+		{Спрайт11: 0},
+		{Key: 0},
+		{KeyIcon: 0},
+		{Спрайт12: 0},
+		{ТайловыйФон9: 0},
+		{Door: 0},
+		{hello2: 0},
+		{Msg: 0},
+		{Спрайт13: 0},
+		{Score: 0},
+		{Timer: 0},
+		{IsKey: 0}
 	];
 }
 
@@ -2967,7 +3024,22 @@ inst.GetBehaviorInstanceFromCtor(C3.Behaviors.scrollto);if(!behInst||!behInst.Ge
 
 	self.C3_ExpressionFuncs = [
 		() => 100,
-		() => 250
+		() => 250,
+		() => 5,
+		() => 1,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
+		() => 4,
+		() => 0.5,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 250);
+		},
+		() => 20,
+		() => -25,
+		() => 2
 	];
 }
 
